@@ -1,3 +1,5 @@
+local utils = require"formatequal.utils"
+
 ---Get all spaces between position in string and first non-space word
 ---Example:
 ---get_spaces_before_position("  hola    = 1", 11) = 4
@@ -28,6 +30,21 @@ local function format_line_to_sign(line, sign)
     return line:gsub(str_replace, sign)
 end
 
+---Format all lines according to format_line_to_sign
+---@param lines table #Table containing all lines to be formatted
+---@param sign string #Character used as special sign
+---@param ignore_line_filter function #Callback funtion that sets if a line should be ignored
+local function format_lines(lines, sign, ignore_line_filter)
+    local new_lines = {}
+    for _, line in ipairs(lines) do
+        local new_line = utils.ignore_this_line(line, ignore_line_filter) and line or format_line_to_sign(line, sign)
+        table.insert(new_lines, new_line)
+    end
+    return new_lines
+end
+
 return {
     format_line_to_sign = format_line_to_sign,
+    get_spaces_before_position = get_spaces_before_position,
+    format_lines = format_lines,
 }
