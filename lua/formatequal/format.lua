@@ -27,8 +27,12 @@ local function format_line_to_sign(line, sign)
     local position = string.find(line, sign)
     if (position == nil) then return line end
     local spaces = get_spaces_before_position(line, position)
-    local str_replace = string.sub(line, position - spaces + 1, position)
-    return line:gsub(str_replace, sign)
+
+    if (spaces == 0) then
+        return line:gsub(sign, " " .. sign, 1)
+    else
+        return line:gsub(line:sub(position - spaces + 1, position), sign)
+    end
 end
 
 ---Format all lines according to format_line_to_sign
