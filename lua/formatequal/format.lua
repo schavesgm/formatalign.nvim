@@ -83,15 +83,10 @@ end
 
 
 ---Format a given selection of lines
-local function format_selected_lines(sign, ignore_line_filter)
-    local bufnr = vim.api.nvim_get_current_buf()
-    local slnr  = vim.fn.line("'<")
-    local elnr  = vim.fn.line(">'")
-    local lines = vim.fn.getline(slnr, elnr)
+local function formatequal_lines(lines, sign, ignore_line_filter)
     lines = format_lines(lines, sign, ignore_line_filter)
     local longest_col = get_longest_sign_column(lines, sign, ignore_line_filter)
-    lines = format_to_longest_col(lines, sign, longest_col, ignore_line_filter)
-    vim.api.nvim_buf_set_lines(bufnr, slnr - 1, elnr, true, lines)
+    return format_to_longest_col(lines, sign, longest_col, ignore_line_filter)
 end
 
 return {
@@ -100,5 +95,5 @@ return {
     format_lines = format_lines,
     get_longest_sign_column = get_longest_sign_column,
     format_to_longest_col = format_to_longest_col,
-    format_selected_lines = format_selected_lines,
+    formatequal_lines = formatequal_lines,
 }
