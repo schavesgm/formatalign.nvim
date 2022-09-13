@@ -15,8 +15,19 @@ local function ignore_this_line(line, filter)
     return filter(line)
 end
 
+---Check if any line contains the character, ignore filtered lines
+local function any_contains_sign(lines, sign, filter)
+    for _, line in ipairs(lines) do
+        if ignore_this_line(line, filter) then goto continue end
+        if (string.find(line, sign) ~= nil) then return true end
+        ::continue::
+    end
+    return false
+end
+
 
 return {
     insert_string = insert_string,
     ignore_this_line = ignore_this_line,
+    any_contains_sign = any_contains_sign,
 }
