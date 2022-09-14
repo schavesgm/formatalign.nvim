@@ -11,8 +11,7 @@ end
 ---@param line string #String to be parsed
 ---@param filter? function #Function to check the condition
 local function ignore_this_line(line, filter)
-    if (filter == nil) then return false end
-    return filter(line)
+    return (filter ~= nil) and filter(line) or false
 end
 
 ---Check if any line contains the character, ignore filtered lines
