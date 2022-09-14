@@ -7,7 +7,7 @@ local ignore_functions  = require"formatalign.ignore"
 
 --Format a selection of lines hierarchically, according to settings.signs
 function M.format_hierarchically()
-    local filetype = vim.bo.filetype:gsub('^%l', string.upper)
+    local filetype = vim.bo.filetype
     local settings = M.settings.filetype[filetype]
 
     -- Ignore this call if necessary
@@ -44,10 +44,10 @@ function M.setup(settings)
             set = true,
         },
         filetype = {
-            Python   = {signs={'=', ':'}, ignore_function=ignore_functions.python},
-            Lua      = {signs={'='}, ignore_function=ignore_functions.lua},
-            Tex      = false,
-            Markdown = false,
+            python   = {signs={'=', ':'}, ignore_function=ignore_functions.python},
+            lua      = {signs={'='}, ignore_function=ignore_functions.lua},
+            tex      = false,
+            markdown = false,
         },
     }
 
