@@ -23,7 +23,6 @@ local month = 'jan'
 local year = 2022
 local day = 21
 local language = 'lua'
-
 -- These lines will be formatted to
 local month    = 'jan'
 local year     = 2022
@@ -34,7 +33,6 @@ local language = 'lua'
 Additionally, `formatalign.nvim` also formats overly spaced lines of code
 ```lua
 local month    = 'jan'
-
 -- The previous line is formatted into
 local month = 'jan'
 ```
@@ -50,9 +48,7 @@ dictionary key-value explicit definitions:
 this_is_a_dict = {
     'hi_there' : 2,
     'quite_long_line' : 3,
-
     # The previous lines are formatted to
-
     'hi_there'        : 2,
     'quite_long_line' : 3
 }
