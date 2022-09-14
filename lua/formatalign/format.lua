@@ -1,5 +1,5 @@
-local ignore_this_line = require"formatequal.utils".ignore_this_line
-local insert_string    = require"formatequal.utils".insert_string
+local ignore_this_line = require"formatalign.utils".ignore_this_line
+local insert_string    = require"formatalign.utils".insert_string
 
 ---Get all spaces between position in string and first non-space word
 ---Example:
