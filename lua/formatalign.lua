@@ -1,12 +1,9 @@
 local M = {}
 
 -- Load the formatter function
-local formatequal_lines = require"formatequal.format".formatequal_lines
-local any_contains_sign = require"formatequal.utils".any_contains_sign
-local ignore_functions  = require"formatequal.ignore"
-
--- Value that sets that a filetype should be ignored
-M.IGNORE = 0
+local formatalign_lines = require"formatalign.format".formatalign_lines
+local any_contains_sign = require"formatalign.utils".any_contains_sign
+local ignore_functions  = require"formatalign.ignore"
 
 --Format a selection of lines hierarchically, according to settings.signs
 function M.format_hierarchically()
@@ -15,7 +12,7 @@ function M.format_hierarchically()
 
     -- Ignore this call if necessary
     if (settings == false) then
-        vim.notify(string.format('formatequal is ignored in %s files', filetype), vim.log.levels.WARN)
+        vim.notify(string.format('formatalign.nvim is ignored in %s files', filetype), vim.log.levels.WARN)
         return
     end
 
@@ -30,7 +27,7 @@ function M.format_hierarchically()
 
     for _, sign in pairs(ordered_signs) do
          if any_contains_sign(lines, sign, ignore_filter) then
-             lines = formatequal_lines(lines, sign, ignore_filter)
+             lines = formatalign_lines(lines, sign, ignore_filter)
              break
          end
     end
@@ -53,10 +50,14 @@ function M.setup(settings)
             Markdown = false,
         },
     }
+
+    -- Update the settings with the provided table
     M.settings = (settings) and vim.tbl_deep_extend('force', M.settings, settings) or M.settings
+
+    -- Set the keybinding if required
     local keybinding = M.settings.keybinding
     if keybinding.set then
-        vim.keymap.set('v', keybinding.lhs, ':lua require"formatequal".format_hierarchically()<Cr>', {silent=true})
+        vim.keymap.set('v', keybinding.lhs, ':lua require"formatalign".format_hierarchically()<Cr>', {silent=true})
     end
 end
 
