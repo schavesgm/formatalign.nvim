@@ -9,7 +9,7 @@ end
 
 ---Check if a line should be ignored according to a filter
 ---@param line string #String to be parsed
----@param filter function #Function to check the condition
+---@param filter? function #Function to check the condition
 local function ignore_this_line(line, filter)
     if (filter == nil) then return false end
     return filter(line)
@@ -18,7 +18,7 @@ end
 ---Check if any line contains the character, ignore filtered lines
 ---@param lines table #Table containing lines to be checked
 ---@param sign string #Character to look for in every line
----@param filter function #Function to run at each line to determine if line should be ignored
+---@param filter? function #Function to run at each line to determine if line should be ignored
 local function any_contains_sign(lines, sign, filter)
     for _, line in ipairs(lines) do
         if ignore_this_line(line, filter) then goto continue end
