@@ -61,7 +61,7 @@ requre"formatalign".setup(options)
 ```
 The default configuration is
 ```lua
-settings = {
+{
     keybinding = {
         lhs = '<leader>=',
         set = true,
